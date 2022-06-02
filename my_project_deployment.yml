@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-eval-deployment
+  labels:
+    app: my-eval-api
+spec:
+  containers:
+  - name: my-flask-api
+    image: zgabriello/projet_flask:latest
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 5000
+  - name: my-test-unitaire
+    image: zgabriello/projet_test:latest
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 5000
+    env:
+    - name : MYSQL_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name : my-eval-secret
+          key: mysql_password

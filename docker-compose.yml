@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  test:
+    image: zgabriello/projet_test:latest
+  flask:
+    image: zgabriello/projet_flask:latest
+    ports:
+      - "5000:5000"
