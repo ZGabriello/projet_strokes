@@ -2,7 +2,23 @@ version: "3.9"
 services:
   test:
     image: zgabriello/projet_test:latest
+    container_name: projet_test_from_compose
+    networks:
+      my_network_from_compose
+    ports:
+      - target: 8000
+      published: 8000
+      protocol: tcp
+      mode: host
   flask:
     image: zgabriello/projet_flask:latest
+    container_name: projet_flask_from_compose
+    networks:
+      my_network_from_compose
     ports:
-      - "5000:5000"
+      - target: "5000:5000"
+      published: "5000:5000"
+      protocol: tcp
+      mode: host
+networks:
+  my_network_from_compose:
